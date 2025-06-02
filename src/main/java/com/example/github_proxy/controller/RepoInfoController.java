@@ -1,21 +1,30 @@
 package com.example.github_proxy.controller;
 
-import com.example.github_proxy.client.GithubClient;
-import com.example.github_proxy.model.RepoInfo;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.github_proxy.mapper.RepoInfoMapper;
+import com.example.github_proxy.model.RepoInfoDto;
+import com.example.github_proxy.service.RepoInfoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/repositories")
 public class RepoInfoController {
-    private GithubClient githubClient;
+    private final RepoInfoService repoInfoService;
+    private final RepoInfoMapper repoInfoMapper;
 
     @GetMapping("/{owner}/{repo}")
-    public RepoInfo getRepository(@PathVariable String owner, @PathVariable String repo) {
-        return githubClient.getRepoInfo(owner, repo);
+    public RepoInfoDto getRepoInfo(@PathVariable String owner, @PathVariable String repo) {
+        return repoInfoMapper.toDto(repoInfoService.getRepoInfo(owner, repo));
+    }
+
+    @PostMapping("/{owner}/{repo}")
+    public RepoInfoDto saveRepoInfo(@PathVariable String owner, @PathVariable String repo) {
+        return repoInfoMapper.toDto(repoInfoService.saveRepoInfo(owner, repo));
+    }
+
+    @DeleteMapping("/{owner}/{repo}")
+    public void deleteRepoInfo(@PathVariable String owner, @PathVariable String repo) {
+        repoInfoService.deleteRepoInfo(owner, repo);
     }
 }
