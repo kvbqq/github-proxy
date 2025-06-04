@@ -1,7 +1,9 @@
 package com.example.github_proxy.exception;
 
-public class RepositoryNotFoundException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class RepositoryNotFoundException extends GithubProxyException {
     public RepositoryNotFoundException(String message) {
-        super(message);
+        super(message, HttpStatus.NOT_FOUND);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.github_proxy.client;
 
-import com.example.github_proxy.model.RepoInfo;
+import com.example.github_proxy.model.RepoInfoGithubResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface GithubClient {
 
     @GetMapping("/repos/{owner}/{repo}")
-    RepoInfo getRepoInfo(
+    RepoInfoGithubResponse getRepoInfo(
             @PathVariable("owner") String owner,
             @PathVariable("repo") String repo
     );
