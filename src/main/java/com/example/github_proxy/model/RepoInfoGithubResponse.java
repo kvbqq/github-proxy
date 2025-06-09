@@ -2,12 +2,14 @@ package com.example.github_proxy.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class RepoInfoGithubResponse {
     @JsonProperty("full_name")
     private String fullName;
