@@ -82,7 +82,7 @@ public class IntegrationTests {
         String repoName = "test-repo";
 
         String url = String.format("http://localhost:%s/local/repositories/%s/%s", appPort, owner, repoName);
-        ResponseEntity<RepoInfo> response = restTemplate.getForEntity(url, RepoInfo.class);
+        ResponseEntity<RepoInfoDto> response = restTemplate.getForEntity(url, RepoInfoDto.class);
 
         assertAll(
                 () -> assertEquals("kvbqq/test-repo", response.getBody().getFullName()),
@@ -113,7 +113,7 @@ public class IntegrationTests {
                 ));
 
         String url = String.format("http://localhost:%s/repositories/%s/%s", appPort, owner, repoName);
-        ResponseEntity<RepoInfo> response = restTemplate.postForEntity(url, repoInfo, RepoInfo.class);
+        ResponseEntity<RepoInfoDto> response = restTemplate.postForEntity(url, repoInfo, RepoInfoDto.class);
 
         assertAll(
                 () -> assertEquals("kvbqq/medical-clinic", response.getBody().getFullName()),
@@ -144,7 +144,7 @@ public class IntegrationTests {
                 ));
 
         String url = String.format("http://localhost:%s/repositories/%s/%s", appPort, owner, repoName);
-        ResponseEntity<RepoInfo> response = restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(repoInfo), RepoInfo.class);
+        ResponseEntity<RepoInfoDto> response = restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<>(repoInfo), RepoInfoDto.class);
 
         assertAll(
                 () -> assertEquals("kvbqq/test-repo", response.getBody().getFullName()),
