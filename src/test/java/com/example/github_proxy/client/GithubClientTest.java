@@ -83,6 +83,7 @@ public class GithubClientTest {
 
     @Test
     void shouldRetry3Times_503() {
+        wireMockServer.resetAll();
         wireMockServer.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/kvbqq/medical-clinic"))
                 .willReturn(aResponse()
                         .withStatus(503)
